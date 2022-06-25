@@ -8,7 +8,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float healthRegenAmount = 1f;
 
     /* Debug Field -> Only for visuals */
-
     [Header("Time it takes to regenarate 1 health in seconds -> (1f / healthRegenAmount)")]
     [SerializeField] private float healthRegenTime = 0f;
 
@@ -17,6 +16,12 @@ public class PlayerHealth : MonoBehaviour
     private float health = 100f;
 
     private bool isHealthRegenerating = false;
+
+    private Animator animator;
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     /* Player Damage and Health Regeneration stuff */
 
@@ -54,6 +59,12 @@ public class PlayerHealth : MonoBehaviour
         }
 
         isHealthRegenerating = false;
+    }
+
+    public void OnAttack()
+    {
+        Debug.Log("Attack");
+        animator.Play("Bash");
     }
 
     /* Health UI Stuff */

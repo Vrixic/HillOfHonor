@@ -1,0 +1,34 @@
+{
+    "name": "GameInput",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "55c4aab5-d922-4fdb-acbd-5cf474250863",
+            "actions": [
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "dfb2300a-3d1b-4b0c-853f-1b42b6ff8224",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "216eec49-9abf-4f93-8c99-f02a3dc321a7",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
