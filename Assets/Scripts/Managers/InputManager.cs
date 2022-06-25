@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
     public GameInput.GameplayActions GameplayActions { get; private set; }
 
     private PlayerHealth PlayerHealth { get; set; }
+    private PlayerMovement PlayerMovement { get; set; }
     private ActiveWeapon ActiveWeapon { get; set; }
 
     private void Awake()
@@ -24,9 +25,13 @@ public class InputManager : MonoBehaviour
         // Player Stuff
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         PlayerHealth = player.GetComponent<PlayerHealth>();
+        PlayerMovement = player.GetComponent<PlayerMovement>();
         ActiveWeapon = player.GetComponent<ActiveWeapon>();
 
         GameplayActions.Attack.performed += ctx => ActiveWeapon.OnAttack();
+
+        /* Debug / Testing */
+        GameplayActions.Duck.performed += ctx => PlayerMovement.OnDuck();
     }
 
     private void OnEnable()

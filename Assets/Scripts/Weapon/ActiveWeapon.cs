@@ -8,16 +8,24 @@ public class ActiveWeapon : MonoBehaviour
 
     public Weapon CurrentWeapon { get; private set; }
 
+    private PlayerMovement playerMovement;
+
     private void Start()
     {
-        CurrentWeapon = Instantiate(WeaponPrefabContainer.Instance.GetWeaponPrefab(WeaponID.Bat), weaponSpawnLocation);      
+        playerMovement = GetComponent<PlayerMovement>();
+        CurrentWeapon = Instantiate(WeaponPrefabContainer.Instance.GetWeaponPrefab(WeaponID.Bat), weaponSpawnLocation);
     }
 
     public void OnAttack()
     {
+        if(playerMovement.IsDucking)
+        {
+            playerMovement.ForceStopDucking();
+        }
+
         CurrentWeapon.Attack();
     }
-
+    
     public void OnAnimationEvent(string eventName)
     {
         CurrentWeapon.OnAnimationEvent(eventName);

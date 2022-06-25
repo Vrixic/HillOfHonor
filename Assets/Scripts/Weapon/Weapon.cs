@@ -16,4 +16,6 @@ public class Weapon : MonoBehaviour
     public virtual void Attack() { }
 
     public virtual void OnAnimationEvent(string eventName) { }
+
+    public virtual bool IsAttacking() { return false; }
 }

@@ -17,11 +17,8 @@ public class Weapon_Melee : Weapon
         [SerializeField] private float chargeTime = 1f;
         public float ChargeTime { get { return chargeTime; } }
 
-        [SerializeField] private float attackRate = 1f;
-        protected float AttackTime { get { return attackRate; } }
-
         [SerializeField] private float coolDownTime = 1f;
-        protected float CoolDownTime { get { return coolDownTime; } }
+        public float CoolDownTime { get { return coolDownTime; } }
     }
 
     [SerializeField] protected MeleeConfig meleeConfig;
@@ -41,10 +38,12 @@ public class Weapon_Melee : Weapon
     public override void Attack()
     {
         base.Attack();
+
         if(CanAttack())
         {
             Debug.Log("Weapon_Melee.Attack()");
-            PlayerAnimator.Play("Bash");
+
+            PlayerAnimator.SetTrigger("Attack");
             weaponState = WeaponState.Charging;
         }
     }
@@ -76,9 +75,14 @@ public class Weapon_Melee : Weapon
 
             case "attack_end":
                 Debug.Log("attack_end");
-                weaponState = WeaponState.Idle;
+                Invoke("ResetWeaponState", meleeConfig.CoolDownTime);
                 break;
         }
+    }
+
+    public void ResetWeaponState()
+    {
+        weaponState = WeaponState.Idle;
     }
 
     #endregion
@@ -92,6 +96,11 @@ public class Weapon_Melee : Weapon
         bool bStateCheck = weaponState == WeaponState.Idle;
 
         return bPlayerCheck && bStateCheck;
+    }
+
+    public override bool IsAttacking()
+    {
+        return weaponState != WeaponState.Idle;
     }
 
     #endregion
