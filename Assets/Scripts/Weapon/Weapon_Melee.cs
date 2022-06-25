@@ -34,15 +34,16 @@ public class Weapon_Melee : Weapon
     {
         base.Start();
         weaponState = WeaponState.Idle;
+
+        gameObject.SetActive(false);
     }
 
     public override void Attack()
     {
         base.Attack();
-        Debug.Log("Weapon_Melee.Attack()");
-
         if(CanAttack())
         {
+            Debug.Log("Weapon_Melee.Attack()");
             PlayerAnimator.Play("Bash");
             weaponState = WeaponState.Charging;
         }
@@ -59,10 +60,20 @@ public class Weapon_Melee : Weapon
                 Debug.Log("attack_start");
                 weaponState = WeaponState.Attacking;
                 break;
+
+            case "draw_weapon":
+                gameObject.SetActive(true);
+                break;
+
+            case "sheathe_weapon":
+                gameObject.SetActive(false);
+                break;
+
             case "cooling_down":
                 Debug.Log("cooling_down");
                 weaponState = WeaponState.CoolingDown;
                 break;
+
             case "attack_end":
                 Debug.Log("attack_end");
                 weaponState = WeaponState.Idle;
