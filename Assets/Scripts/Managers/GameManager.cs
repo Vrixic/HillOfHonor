@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
 
     public PlayerHealth PlayerHealth { get; private set; }
 
+
+    public GameObject Ui;
+    public HealthBar healthbar;
+
     private void Awake()
     {
         if (instance == null)
@@ -16,6 +20,11 @@ public class GameManager : MonoBehaviour
 
         // Player Stuff
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        PlayerHealth = player.GetComponent<PlayerHealth>();
+        PlayerHealth = player.GetComponentInChildren<PlayerHealth>();
+
+        // Ui Stuff
+        Ui = GameObject.FindGameObjectWithTag("UI");
+        healthbar = Ui.GetComponentInChildren<HealthBar>();
+
     }
 }

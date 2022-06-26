@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PauseMenuScript : MonoBehaviour
 {
+    private void OnEnable()
+    {
+        EventSystem.current.SetSelectedGameObject(GetComponentInChildren<Button>().gameObject);
+    }
+
     public void Resume()
     {
         // Set Cursor state back to locked and turn visibility off

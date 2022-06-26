@@ -66,12 +66,16 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Attack");
         animator.Play("Bash");
     }
+    public float GetPlayerCurrentHealth()
+    {
+        return health;
+    }
 
     /* Health UI Stuff */
-
+    
     private void UpdateHealthUI()
     {
-
+        GameManager.Instance.healthbar.UpdateHealthBar();
     }
 
     private void OnValidate()
